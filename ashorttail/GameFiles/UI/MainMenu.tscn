@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt4v5evcry8op"]
+[gd_scene load_steps=5 format=3 uid="uid://bt4v5evcry8op"]
 
 [ext_resource type="Script" path="res://GameFiles/Script/main_menu.gd" id="1_s4xhk"]
+[ext_resource type="Theme" uid="uid://bhkspvig5phsg" path="res://GameFiles/Resources/Themes/mainMenuButtonTheme.tres" id="2_xoyls"]
 
 [sub_resource type="Theme" id="Theme_4x8md"]
 default_font_size = 85
@@ -96,11 +97,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 60
 
 [node name="Control" type="Control" parent="MainMenuButtons"]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuButtons/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -36.0
+offset_right = 20.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Button" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
+theme = ExtResource("2_xoyls")
+text = "Play"
+
+[node name="Button2" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xoyls")
+text = "Play"

@@ -29,6 +29,8 @@ enabled=PackedStringArray("res://addons/maaacks_menus_template/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://GameFiles/Resources/": "blue",
+"res://GameFiles/Resources/Themes/": "pink",
 "res://GameFiles/Scenes/": "yellow",
 "res://GameFiles/Script/": "red",
 "res://GameFiles/UI/": "green"
