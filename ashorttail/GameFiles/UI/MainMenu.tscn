@@ -17,6 +17,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s4xhk")
+title = "Title"
+subTitle = "SubTitle"
 
 [node name="VersionMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -61,7 +63,7 @@ layout_mode = 2
 [node name="Control" type="Control" parent="MenuMargin/TitleMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MenuMargin/TitleMargin/Control"]
+[node name="titleLabel" type="Label" parent="MenuMargin/TitleMargin/Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -79,7 +81,7 @@ theme_override_constants/margin_top = 135
 [node name="Control2" type="Control" parent="MenuMargin/SubTitleMargin"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MenuMargin/SubTitleMargin/Control2"]
+[node name="subtitleLabel" type="Label" parent="MenuMargin/SubTitleMargin/Control2"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -118,22 +120,27 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Button" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Play"
 
-[node name="Button2" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Options"
 
-[node name="Button3" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Credits"
 
-[node name="Button4" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Exit"
+
+[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
