@@ -1,7 +1,115 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt4v5evcry8op"]
+[gd_scene load_steps=11 format=3 uid="uid://bt4v5evcry8op"]
 
 [ext_resource type="Script" path="res://GameFiles/Script/main_menu.gd" id="1_s4xhk"]
 [ext_resource type="Theme" uid="uid://bhkspvig5phsg" path="res://GameFiles/Resources/Themes/mainMenuButtonTheme.tres" id="2_xoyls"]
+
+[sub_resource type="Animation" id="Animation_tnlec"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VersionMargin:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuMargin/TitleMargin:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3gpg1"]
+resource_name = "IntroFade"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VersionMargin:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.16667, 1.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MenuMargin/TitleMargin:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuMargin/SubTitleMargin:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.466667, 1.43333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MenuMargin/MainMenuButtons:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.966667, 1.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqw4w"]
+_data = {
+"Intro": SubResource("Animation_3gpg1"),
+"RESET": SubResource("Animation_tnlec")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hjflx"]
+animation = &"Intro"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p0syt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8bm6g"]
+states/Intro/node = SubResource("AnimationNodeAnimation_hjflx")
+states/Intro/position = Vector2(401, 100)
+states/Start/position = Vector2(238, 100)
+transitions = ["Start", "Intro", SubResource("AnimationNodeStateMachineTransition_p0syt")]
 
 [sub_resource type="Theme" id="Theme_4x8md"]
 default_font_size = 85
@@ -19,6 +127,16 @@ grow_vertical = 2
 script = ExtResource("1_s4xhk")
 title = "Title"
 subTitle = "SubTitle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mqw4w")
+}
+autoplay = "Intro"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_8bm6g")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="VersionMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,7 +173,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 75
 
 [node name="TitleMargin" type="MarginContainer" parent="MenuMargin"]
 layout_mode = 2
@@ -92,55 +210,50 @@ text = "SubTitle"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButtons" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenuButtons" type="MarginContainer" parent="MenuMargin"]
+layout_mode = 2
 theme_override_constants/margin_top = 90
 
-[node name="Control" type="Control" parent="MainMenuButtons"]
+[node name="Control" type="Control" parent="MenuMargin/MainMenuButtons"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuButtons/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuMargin/MainMenuButtons/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = -62.0
-offset_right = 39.0
-offset_bottom = 62.0
+offset_left = -61.0
+offset_top = -115.0
+offset_right = 61.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MenuMargin/MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Play"
 
-[node name="OptionsButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MenuMargin/MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Options"
 
-[node name="CreditsButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MenuMargin/MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Credits"
 
-[node name="ExitButton" type="Button" parent="MainMenuButtons/Control/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MenuMargin/MainMenuButtons/Control/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xoyls")
 text = "Exit"
 
-[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="MainMenuButtons/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuMargin/MainMenuButtons/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuMargin/MainMenuButtons/Control/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuMargin/MainMenuButtons/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuMargin/MainMenuButtons/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
