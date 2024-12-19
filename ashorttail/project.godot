@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="AshortTail"
+config/name="A Short Tail"
+config/version="0.0.1"
 run/main_scene="res://MenusTemp/scenes/opening/opening_with_logo.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
@@ -22,6 +23,11 @@ SceneLoader="*res://addons/maaacks_menus_template/base/scenes/autoloads/scene_lo
 ProjectMusicController="*res://addons/maaacks_menus_template/base/scenes/autoloads/project_music_controller.tscn"
 ProjectUISoundController="*res://addons/maaacks_menus_template/base/scenes/autoloads/project_ui_sound_controller.tscn"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/maaacks_menus_template/plugin.cfg")
@@ -29,6 +35,8 @@ enabled=PackedStringArray("res://addons/maaacks_menus_template/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://GameFiles/Resources/": "blue",
+"res://GameFiles/Resources/Themes/": "pink",
 "res://GameFiles/Scenes/": "yellow",
 "res://GameFiles/Script/": "red",
 "res://GameFiles/UI/": "green"

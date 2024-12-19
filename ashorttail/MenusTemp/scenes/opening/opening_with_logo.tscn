@@ -1,10 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpconvy1o1rvm"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_menus_template/base/scenes/opening/opening.tscn" id="1_m02ia"]
+[ext_resource type="PackedScene" uid="uid://sikc02ddepyt" path="res://addons/maaacks_menus_template/base/scenes/opening/opening.tscn" id="1_m02ia"]
 [ext_resource type="Script" path="res://MenusTemp/scenes/opening/opening.gd" id="2_mbkj6"]
-[ext_resource type="Texture2D" path="res://MenusTemp/assets/images/logo_vertical_color_dark.png" id="3_f5fps"]
+[ext_resource type="Texture2D" uid="uid://cfudd073fynh3" path="res://MenusTemp/assets/images/logo_vertical_color_dark.png" id="3_f5fps"]
 
 [node name="Opening" instance=ExtResource("1_m02ia")]
 script = ExtResource("2_mbkj6")
 next_scene = "res://MenusTemp/scenes/menus/main_menu/main_menu_with_animations.tscn"
 images = Array[Texture2D]([ExtResource("3_f5fps")])
+
+[node name="BackgroundMusicPlayer" parent="." index="0"]
+bus = &"Master"
